@@ -28,6 +28,26 @@ E a regra de ouro de cada tomada:
 
 > **Câmera + ação + continuidade + emoção + efeito permitido.**
 
+## O conceito: como o padrão é construído
+
+O MDD não é só um template — é um **sistema reaproveitável** pensado em 3 níveis crescentes de sofisticação:
+
+1. **Template fixo** — a estrutura nunca muda. A IA sempre preenche os mesmos blocos 01–07. É o ponto de partida e garante consistência.
+2. **Biblioteca de estilos e tomadas** — a IA escolhe câmera, ritmo e efeitos conforme o assunto, puxando da biblioteca de tomadas e dos presets. Deixa de ser engessado e passa a se adaptar.
+3. **Treinamento por exemplos** — você mostra 5, 10, 20 pacotes nesse formato e a IA aprende o seu gosto específico.
+
+O segredo é não "treinar" no sentido técnico logo de cara: primeiro você cria o **formato mestre** e manda a IA sempre preencher esse formato. O refinamento vem depois.
+
+### Como "treinar" a IA para o seu gosto
+
+Três caminhos, do mais simples ao mais avançado:
+
+- **Por conversa** — peça o pacote e vá corrigindo em linguagem natural: *"ficou bom, mas quero mais câmera e menos texto"*, *"agora em 12 tomadas"*, *"agora versão 9:16"*. Com 5–10 exemplos a IA já segue melhor seu padrão.
+- **Por biblioteca de presets** — categorias prontas (ação, produto premium, tech/IA, imobiliário, evento, história emocional) que a IA escolhe conforme o assunto. Veja `skill/references/presets.md`.
+- **Por gerador de prompts próprio** — campos fixos (assunto, público, formato, duração, estilo, chamada, emoção, CTA, ferramenta) que sempre produzem a mesma saída: storyboard + prompt de imagem + prompt de vídeo + prompt negativo + checklist.
+
+**Esta skill já é a realização desses 3 níveis:** o `SKILL.md` é o template mestre + gerador; `references/biblioteca-tomadas.md` e `references/presets.md` são a biblioteca de estilos; e a pasta `exemplos/` é onde o treinamento por exemplos se acumula.
+
 ## Como usar
 
 Com a skill instalada, basta pedir em linguagem natural:
@@ -52,6 +72,9 @@ skill/
 └── references/
     ├── biblioteca-tomadas.md   # tomadas de câmera (push-in, crash zoom, orbit…) + sequências por assunto
     └── presets.md              # 6 presets de estilo + guia de conflito visual por domínio
+exemplos/                       # pacotes gerados (treinamento por exemplos)
+├── ia-no-cinema.md
+└── hormozi-12-dicas.md
 ```
 
 ### Presets disponíveis
