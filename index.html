@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<!-- Landing + guia do MDD. Padrao projetos-landing-guia (INEMA). Self-contained. -->
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MDD — Mestre de Direção Dinâmica</title>
+<meta name="description" content="Skill para Claude Code que transforma qualquer assunto em um pacote completo de direção de vídeo dinâmico, pronto pra Seedance, Kling, Runway, Veo ou Luma.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0c0c10; --bg2:#14141b; --card:#16161e; --line:#272730;
+    --txt:#e9e9ee; --mut:#9a9aa6; --amb:#E2A23B; --amb2:#f0c070; --sky:#38bdf8;
+    color-scheme:dark;
+  }
+  body.light{
+    --bg:#f6f7f9; --bg2:#eceef2; --card:#ffffff; --line:#e1e3ea;
+    --txt:#1a1a22; --mut:#5b5b68; --amb:#b9791d; --amb2:#a16207; --sky:#0369a1;
+    color-scheme:light;
+  }
+  body.light .hero .glow{opacity:.5}
+  body.light pre{background:#0e0e14;color:#d6d6e0}
+  body.light pre .c{color:#8a8a98}
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--txt);font:16px/1.65 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  h1,h2,h3{font-family:Sora,sans-serif;line-height:1.15;margin:0}
+  a{color:var(--amb);text-decoration:none}
+  code,pre{font-family:"JetBrains Mono",monospace}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 22px}
+  .mut{color:var(--mut)} .amb{color:var(--amb)}
+  .chip{display:inline-block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--amb);font-weight:600;font-family:Sora}
+  nav{position:sticky;top:0;z-index:30;backdrop-filter:blur(12px);background:rgba(12,12,16,.78);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;gap:22px;height:60px}
+  nav .brand{display:flex;align-items:center;gap:8px;font-family:Sora;font-weight:800;letter-spacing:-.02em;color:var(--amb)}
+  nav .brand .emoji{font-size:1.25rem}
+  nav .sep{color:var(--mut);opacity:.45}
+  nav .inema{color:var(--sky);font-weight:600;font-size:.88rem;font-family:Sora}
+  nav .inema:hover{filter:brightness(1.15)}
+  nav .links{margin-left:auto;display:flex;align-items:center;gap:20px;font-size:.92rem}
+  nav .links a.sec{color:var(--mut)} nav .links a.sec:hover{color:var(--txt)}
+  .tgl{background:var(--bg2);border:1px solid var(--line);color:var(--txt);width:38px;height:38px;border-radius:10px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;font-size:1.05rem}
+  .tgl:hover{border-color:var(--amb)}
+  .btn{display:inline-block;background:var(--amb);color:#1a1206;font-weight:600;padding:.6em 1.05em;border-radius:10px;font-family:Sora}
+  .btn.ghost{background:transparent;color:var(--txt);border:1px solid var(--line)}
+  @media(max-width:760px){nav .links a.sec{display:none}}
+  .hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+  .hero .glow{position:absolute;inset:-40% -20% auto auto;width:70%;height:600px;background:radial-gradient(closest-side,rgba(226,162,59,.22),transparent 70%);pointer-events:none}
+  .hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;padding:74px 22px}
+  .hero h1{font-size:clamp(2.2rem,5vw,3.5rem);font-weight:800;letter-spacing:-.025em}
+  .hero p.lead{font-size:1.18rem;color:var(--mut);margin:1.1em 0 1.6em;max-width:38ch}
+  .hero .cta{display:flex;gap:12px;flex-wrap:wrap}
+  .hero figure{margin:0;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 80px -30px #000}
+  .hero figure img{width:100%;display:block}
+  @media(max-width:780px){.hero .wrap{grid-template-columns:1fr;padding:48px 22px}}
+  section{padding:62px 0;border-bottom:1px solid var(--line)}
+  section h2{font-size:clamp(1.5rem,3.4vw,2.1rem);font-weight:800;letter-spacing:-.02em}
+  section .sub{color:var(--mut);margin:.6em 0 2em;max-width:62ch}
+  .grid{display:grid;gap:16px}
+  .g3{grid-template-columns:repeat(3,1fr)} .g4{grid-template-columns:repeat(4,1fr)} .g2{grid-template-columns:repeat(2,1fr)}
+  @media(max-width:820px){.g3,.g4{grid-template-columns:1fr 1fr}}
+  @media(max-width:540px){.g2,.g3,.g4{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
+  .card h3{font-size:1.05rem;margin-bottom:.4em}
+  .card p{color:var(--mut);font-size:.92rem;margin:0}
+  .num{display:inline-flex;width:30px;height:30px;align-items:center;justify-content:center;border-radius:8px;background:rgba(226,162,59,.14);color:var(--amb);font-family:Sora;font-weight:800;font-size:.9rem;margin-bottom:.7em}
+  .flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px}
+  .flow span{background:var(--bg2);border:1px solid var(--line);border-radius:999px;padding:.45em .9em;font-size:.85rem;font-family:Sora;font-weight:600}
+  .flow .arr{color:var(--amb);border:none;background:none;padding:0 .1em}
+  pre{background:#0a0a0e;border:1px solid var(--line);border-radius:12px;padding:16px 18px;overflow:auto;font-size:.86rem;line-height:1.6;color:#d6d6e0}
+  pre .c{color:#6f6f7c} pre .k{color:var(--amb2)} pre .s{color:#9ece6a}
+  .step{display:grid;grid-template-columns:46px 1fr;gap:16px;margin-bottom:26px}
+  .step .b{width:46px;height:46px;border-radius:12px;background:var(--amb);color:#1a1206;font-family:Sora;font-weight:800;font-size:1.25rem;display:flex;align-items:center;justify-content:center}
+  .step h3{font-size:1.12rem;margin-bottom:.3em}
+  .step p{color:var(--mut);margin:.2em 0 .7em}
+  .ex{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media(max-width:680px){.ex{grid-template-columns:1fr}}
+  .ex figure{margin:0;border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+  .ex figure img{width:100%;display:block}
+  .ex figcaption{padding:12px 14px;font-size:.88rem;color:var(--mut);background:var(--card)}
+  .phase{display:flex;gap:14px;padding:16px 0;border-bottom:1px solid var(--line)}
+  .phase:last-child{border:none}
+  .phase .tag{flex:0 0 92px;font-family:Sora;font-weight:800;color:var(--amb)}
+  .phase .d strong{display:block;margin-bottom:.2em}
+  .phase .d span{color:var(--mut);font-size:.92rem}
+  footer{padding:46px 0;text-align:center;color:var(--mut);font-size:.9rem}
+  .pill{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:.3em .8em;font-size:.78rem;color:var(--mut);margin:0 4px}
+</style>
+</head>
+<body>
+
+<nav><div class="wrap">
+  <a class="brand" href="#top"><span class="emoji">🎬</span> MDD</a>
+  <span class="sep">|</span>
+  <a class="inema" href="https://inema.club" target="_blank" rel="noopener">INEMA.CLUB</a>
+  <div class="links">
+    <a class="sec" href="#oque">O que é</a>
+    <a class="sec" href="#fluxo">Como funciona</a>
+    <a class="sec" href="#guia">Guia de uso</a>
+    <a class="sec" href="#exemplos">Exemplos</a>
+    <a class="sec" href="#roadmap">Roadmap</a>
+    <button class="tgl" id="themeToggle" aria-label="Alternar tema" title="Alternar tema">🌙</button>
+    <a class="btn" href="https://github.com/inematds/mdd" target="_blank" rel="noopener">GitHub</a>
+  </div>
+</div></nav>
+
+<header class="hero" id="top">
+  <div class="glow"></div>
+  <div class="wrap">
+    <div>
+      <span class="chip">Skill para Claude Code · direção de vídeo</span>
+      <h1>Qualquer assunto vira um <span class="amb">pacote de vídeo dinâmico</span></h1>
+      <p class="lead">O MDD dirige uma cena com movimento, intenção e continuidade — pronta pra gerar em Seedance, Kling, Runway, Veo ou Luma. Não "uma pessoa usando X": câmera que muda por motivo, ação que progride e um fechamento forte.</p>
+      <div class="cta">
+        <a class="btn" href="#guia">Começar o guia</a>
+        <a class="btn ghost" href="https://github.com/inematds/mdd" target="_blank" rel="noopener">Ver no GitHub</a>
+      </div>
+    </div>
+    <figure><pre><span class="c"># a fórmula central</span>
+assunto <span class="k">→</span> conflito visual <span class="k">→</span> progressão
+        <span class="k">→</span> virada <span class="k">→</span> impacto suspenso
+
+<span class="c"># a regra de ouro de cada tomada</span>
+câmera + ação + continuidade
+       + emoção + efeito permitido
+
+<span class="c"># a saída: 7 blocos, sempre nesta ordem</span>
+<span class="k">01</span> Cartão do projeto
+<span class="k">02</span> Pacote de cena
+<span class="k">03</span> Bloqueios de estilo
+<span class="k">04</span> Storyboard (8 / 12 / 16 painéis)
+<span class="k">05</span> Faixa do diretor
+<span class="k">06</span> Prompt final de vídeo
+<span class="k">07</span> Prompt negativo</pre></figure>
+  </div>
+</header>
+
+<section id="oque"><div class="wrap">
+  <span class="chip">O que é</span>
+  <h2>Direção dinâmica, não descrição estática</h2>
+  <p class="sub">A maioria dos prompts devolve uma imagem parada com legenda. O MDD trata o assunto como um filme curto: encontra o conflito visual e o resolve com câmera, ação e continuidade.</p>
+  <div class="grid g3">
+    <div class="card"><h3>🎥 Direção, não descrição</h3><p>Câmera, ação, continuidade, emoção e efeito permitido em cada tomada. Acha o conflito visual <em>antes</em> de montar o storyboard.</p></div>
+    <div class="card"><h3>📦 7 blocos fixos</h3><p>Cartão do projeto, pacote de cena, bloqueios de estilo, storyboard, faixa do diretor, prompt final e prompt negativo — sempre na mesma ordem.</p></div>
+    <div class="card"><h3>♻️ Sistema que aprende</h3><p>Template fixo → biblioteca de tomadas e presets → treino por exemplos. Consistência que vai se adaptando ao seu gosto.</p></div>
+  </div>
+</div></section>
+
+<section id="fluxo"><div class="wrap">
+  <span class="chip">Como funciona</span>
+  <h2>Do assunto ao prompt pronto</h2>
+  <p class="sub">Regra de ouro de cada tomada: <strong>câmera + ação + continuidade + emoção + efeito permitido</strong>. Sem conflito visual, o vídeo fica parado — por isso a skill acha o conflito primeiro (produto: problema × solução; imóvel: espaço comum × experiência; IA: tela vazia × revelação).</p>
+  <div class="flow">
+    <span>Assunto</span><span class="arr">→</span>
+    <span>Conflito visual</span><span class="arr">→</span>
+    <span>Progressão</span><span class="arr">→</span>
+    <span>Virada</span><span class="arr">→</span>
+    <span>Impacto suspenso</span>
+  </div>
+  <div class="flow" style="margin-top:18px">
+    <span>01 Cartão</span><span class="arr">→</span>
+    <span>02 Pacote de cena</span><span class="arr">→</span>
+    <span>03 Bloqueios de estilo</span><span class="arr">→</span>
+    <span>04 Storyboard</span><span class="arr">→</span>
+    <span>05 Faixa do diretor</span><span class="arr">→</span>
+    <span>06 Prompt final</span><span class="arr">→</span>
+    <span>07 Prompt negativo</span>
+  </div>
+</div></section>
+
+<section id="pre"><div class="wrap">
+  <span class="chip">Pré-requisitos</span>
+  <h2>O que precisa pra rodar</h2>
+  <p class="sub">É uma skill de texto puro — leve. Você só precisa do Claude Code e, no fim, de uma ferramenta de geração de vídeo pra colar o prompt.</p>
+  <div class="grid g3">
+    <div class="card"><h3>🤖 Claude Code</h3><p>O agente que executa a skill. A skill é acionada por linguagem natural.</p><pre><span class="c"># https://claude.com/claude-code</span></pre></div>
+    <div class="card"><h3>🧩 A skill instalada</h3><p>Copie a pasta <code>skill/</code> pro diretório de skills, com o nome da skill.</p><pre><span class="k">cp -r skill ~/.claude/skills/mestre-direcao-dinamica</span></pre></div>
+    <div class="card"><h3>🎬 Gerador de vídeo</h3><p>Onde você cola o prompt final (bloco 06). Qualquer um serve.</p><pre><span class="c"># Seedance · Kling · Runway</span>
+<span class="c"># Veo · Luma · similares</span></pre></div>
+  </div>
+</div></section>
+
+<section id="guia"><div class="wrap">
+  <span class="chip">Guia de uso · passo a passo</span>
+  <h2>Do pedido ao vídeo gerado</h2>
+  <p class="sub">A skill não trava com perguntas: se faltar formato, duração ou estilo, ela assume a opção mais forte pro conflito visual e declara a suposição.</p>
+
+  <div class="step"><div class="b">1</div><div>
+    <h3>Instale a skill</h3>
+    <p>Uma vez só. Depois ela dispara sozinha quando você pedir direção dinâmica.</p>
+<pre><span class="k">cp -r skill ~/.claude/skills/mestre-direcao-dinamica</span>  <span class="c"># instala</span></pre>
+  </div></div>
+
+  <div class="step"><div class="b">2</div><div>
+    <h3>Peça o pacote em linguagem natural</h3>
+    <p>Dê o assunto. A skill devolve os 7 blocos completos (cartão → prompt negativo).</p>
+<pre><span class="k">direção dinâmica sobre IA no cinema</span></pre>
+  </div></div>
+
+  <div class="step"><div class="b">3</div><div>
+    <h3>Ajuste conversando</h3>
+    <p>Mude tomadas, formato, duração ou preset sem reescrever nada — é só pedir.</p>
+<pre><span class="k">transforma em 12 tomadas e usa o preset de imobiliário</span>
+<span class="k">agora versão 9:16, 15s</span>  <span class="c"># vertical pra Reels/Shorts</span></pre>
+  </div></div>
+
+  <div class="step"><div class="b">4</div><div>
+    <h3>Cole na ferramenta de geração</h3>
+    <p>O <strong>bloco 06</strong> (prompt final) vai no campo de prompt; o <strong>bloco 07</strong> (negativo) no campo negativo. A chamada principal fica <em>fora</em> do prompt (vai na edição), pra IA não renderizar texto torto.</p>
+<pre><span class="c"># 06 → prompt · 07 → negativo · CTA → na edição</span></pre>
+  </div></div>
+</div></section>
+
+<section id="exemplos"><div class="wrap">
+  <span class="chip">Exemplos</span>
+  <h2>Pacotes gerados de verdade</h2>
+  <p class="sub">A pasta <code>exemplos/</code> acumula pacotes reais — é também o "treino por exemplos": quanto mais você junta, mais a IA pega o seu gosto.</p>
+  <div class="grid g2">
+    <div class="card">
+      <h3>🎞️ IA no cinema — bloco 06 (prompt final)</h3>
+<pre>Cinematic tech sequence in a dark studio, single desk,
+cold blue side light with a warm amber glow growing from
+a monitor… begins on a pitch-black monitor with a blinking
+cursor as the camera slowly pushes in… from the noise a
+cinematic face resolves into sharp focus… ends on a slow
+push-in that freezes on the living scene at its peak.</pre>
+      <p style="margin-top:10px">Storyboard de 8 painéis, push-in/orbit/rack focus, continuidade travada. Veja <code>exemplos/ia-no-cinema.md</code>.</p>
+    </div>
+    <div class="card">
+      <h3>🗣️ Hormozi — 12 dicas</h3>
+<pre><span class="c"># um assunto "falado" virando cena dinâmica</span>
+01 Cartão  →  02 Pacote de cena  →  03 Bloqueios
+04 Storyboard (12 painéis)  →  05 Faixa do diretor
+06 Prompt final  →  07 Prompt negativo</pre>
+      <p style="margin-top:10px">Mesmo formato, outro domínio. Veja <code>exemplos/hormozi-12-dicas.md</code>.</p>
+    </div>
+  </div>
+</div></section>
+
+<section id="roadmap"><div class="wrap">
+  <span class="chip">Roadmap · os 3 níveis</span>
+  <h2>De template a sistema que aprende</h2>
+  <p class="sub">O MDD foi pensado em 3 níveis crescentes de sofisticação — e a skill já realiza os três. Presets disponíveis: Ação/esporte · Produto premium · Tecnologia/IA · Imobiliário · Evento · História emocional.</p>
+  <div class="phase"><div class="tag">Nível 1</div><div class="d"><strong>Template fixo</strong><span>A estrutura 01–07 nunca muda. A IA sempre preenche os mesmos blocos — garante consistência. É o <code>SKILL.md</code>.</span></div></div>
+  <div class="phase"><div class="tag">Nível 2</div><div class="d"><strong>Biblioteca de estilos e tomadas</strong><span>A IA escolhe câmera, ritmo e efeitos conforme o assunto, puxando de <code>references/biblioteca-tomadas.md</code> e <code>references/presets.md</code>. Deixa de ser engessado.</span></div></div>
+  <div class="phase"><div class="tag">Nível 3</div><div class="d"><strong>Treinamento por exemplos</strong><span>Você acumula pacotes em <code>exemplos/</code> e a IA aprende o seu gosto específico — por conversa, por presets ou por gerador de prompts próprio.</span></div></div>
+</div></section>
+
+<footer>
+  <div class="wrap">
+    <div class="pill">Claude Code</div><div class="pill">Markdown puro</div><div class="pill">MIT</div>
+    <p style="margin-top:18px">MDD — Mestre de Direção Dinâmica ·
+      <a href="https://github.com/inematds/mdd">github.com/inematds/mdd</a> ·
+      <a href="https://inema.club">INEMA.CLUB</a></p>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var KEY='mdd-theme';
+    var b=document.body, t=document.getElementById('themeToggle');
+    if(localStorage.getItem(KEY)==='light'){ b.classList.add('light'); t.textContent='☀️'; }
+    t.addEventListener('click',function(){
+      var light=b.classList.toggle('light');
+      t.textContent=light?'☀️':'🌙';
+      localStorage.setItem(KEY, light?'light':'dark');
+    });
+  })();
+</script>
+</body>
+</html>
